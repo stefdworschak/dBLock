@@ -24,16 +24,16 @@ class dBlock {
     return new this('Genesis Time','-------','f1r57-H45h',[]);
   }
 
-  static mineBlock(lastBlock, data){
+  static mineBlock(prevBlock, data){
       const timestamp = Date.now();
-      const lastHash = lastBlock.hash;
-      const hash = dBlock.hash(timestamp,lastHash,data);
+      const prevHash = prevBlock.hash;
+      const hash = dBlock.hash(timestamp,prevHash,data);
 
-      return new this(timestamp, lastHash, hash, data);
+      return new this(timestamp, prevHash, hash, data);
   }
 
-  static hash(timestamp, lastHash, data){
-      return SHA256(`${timestamp}${lastHash}${data}`).toString();
+  static hash(timestamp, prevHash, data){
+      return SHA256(`${timestamp}${prevHash}${data}`).toString();
   }
 
 }
